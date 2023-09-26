@@ -1,13 +1,16 @@
---criando tabela para resultados 
 
-CREATE TABLE result(
-	id SERIAL PRIMARY KEY,
-	nome_pais VARCHAR(50),
-	preco_medio FLOAT,
-	descricao_mais_longa VARCHAR(1000)
-);
+-- SELECT * FROM result_vinho;
 
--- -- Identificar a descrição mais longa para os vinhos de cada país utilizando um cursor vinculado.
+-- --criando tabela para resultados 
+-- DROP TABLE result_vinho
+-- CREATE TABLE result_vinho(
+-- 	id SERIAL PRIMARY KEY,
+-- 	nome_pais VARCHAR(50),
+-- 	preco_medio FLOAT,
+-- 	descricao_mais_longa VARCHAR(1000)
+-- );
+
+-- -- -- Identificar a descrição mais longa para os vinhos de cada país utilizando um cursor vinculado.
 -- DO $$
 -- DECLARE
 -- v_country VARCHAR(200);
@@ -20,6 +23,8 @@ CREATE TABLE result(
 -- 		FETCH cur_country_descri INTO v_country, v_description;
 -- 		EXIT WHEN NOT FOUND;
 -- 		RAISE NOTICE '%: %', v_country, v_description;
+-- 		INSERT INTO result_vinho (nome_pais, descricao_mais_longa)
+--     	VALUES (v_country, v_description);
 -- 	END LOOP;
 -- 	CLOSE cur_country_descri;
 -- END;
@@ -27,7 +32,7 @@ CREATE TABLE result(
 
 
 
---Calcular o preço médio dos vinhos de cada país utilizando um cursor não vinculado.
+-- --Calcular o preço médio dos vinhos de cada país utilizando um cursor não vinculado.
 
 -- DO $$
 -- DECLARE
@@ -50,8 +55,9 @@ CREATE TABLE result(
 --   LOOP
 --     FETCH cur_media_prec INTO v_country, v_price;
 --     EXIT WHEN NOT FOUND;
-
 --     RAISE NOTICE '%: %.2f', v_country, v_price; -- Exibindo o preço médio com duas casas decimais
+-- 	INSERT INTO result_vinho (nome_pais, preco_medio)
+--     VALUES (v_country, v_price);
 --   END LOOP;
 
 --   CLOSE cur_media_prec;
