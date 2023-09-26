@@ -1,20 +1,29 @@
--- Identificar a descrição mais longa para os vinhos de cada país utilizando um cursor vinculado.
-DO $$
-DECLARE
-v_country VARCHAR(200);
-v_description VARCHAR(1000);
-cur_country_descri CURSOR FOR SELECT country, description FROM
-vinho ORDER BY country, LENGTH(description) DESC ;
-BEGIN
-	OPEN cur_country_descri;
-	LOOP
-		FETCH cur_country_descri INTO v_country, v_description;
-		EXIT WHEN NOT FOUND;
-		RAISE NOTICE '%: %', v_country, v_description;
-	END LOOP;
-	CLOSE cur_country_descri;
-END;
-$$
+--criando tabela para resultados 
+
+CREATE TABLE result(
+	id SERIAL PRIMARY KEY,
+	nome_pais VARCHAR(50),
+	preco_medio FLOAT,
+	descricao_mais_longa VARCHAR(1000)
+);
+
+-- -- Identificar a descrição mais longa para os vinhos de cada país utilizando um cursor vinculado.
+-- DO $$
+-- DECLARE
+-- v_country VARCHAR(200);
+-- v_description VARCHAR(1000);
+-- cur_country_descri CURSOR FOR SELECT country, description FROM
+-- vinho ORDER BY country, LENGTH(description) DESC ;
+-- BEGIN
+-- 	OPEN cur_country_descri;
+-- 	LOOP
+-- 		FETCH cur_country_descri INTO v_country, v_description;
+-- 		EXIT WHEN NOT FOUND;
+-- 		RAISE NOTICE '%: %', v_country, v_description;
+-- 	END LOOP;
+-- 	CLOSE cur_country_descri;
+-- END;
+-- $$
 
 
 
